@@ -39,21 +39,23 @@ class AuthController extends Controller
     }
 
     // Login method
-    public function login(Request $request)
-    {
-        $credentials = $request->only('email', 'password');
+  public function login(Request $request)
+{
+    $credentials = $request->only('email', 'password');
 
-        if (!$token = Auth::guard('api')->attempt($credentials)) {
-            return response()->json(['error' => 'Unauthorized'], 401);
-        }
-
-        return response()->json([
-            'token' => $token,
-            'token_type' => 'bearer',
-            'expires_in' => auth('api')->factory()->getTTL() * 60
-        ]);
+    if (!$token = Auth::guard('api')->attempt($credentials)) {
+        return response()->json(['error' => 'Unauthorized'], 401);
     }
 
+    $user = Auth::guard('api')->user();  // Get the authenticated user
+
+    return response()->json([
+        'token' => $token,
+        'token_type' => 'bearer',
+        'expires_in' => auth('api')->factory()->getTTL() * 60,
+        'role' => $user->role,   // Return role here
+    ]);
+}
     // Get authenticated user (profile)
     public function me()
     {
