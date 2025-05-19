@@ -35,7 +35,7 @@ class EventController extends Controller
     public function store(Request $request)
     {
            $userId = 5;  // you can set this to any existing admin user ID
-           console.log( $userId);
+        //    console.log( $userId);
     Log::info('Creating a new event', [
         'user_id' => $userId,
         'request_data' => $request->all(),

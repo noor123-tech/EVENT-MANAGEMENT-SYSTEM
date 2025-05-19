@@ -1,17 +1,23 @@
+import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Register from './pages/Register';
 import Login from './pages/Login';
-import Home from './pages/Home';
+// import Home from './pages/Home';
 import AdminDashboard from './pages/AdminDashboard';
-
+import Testhomepage from './pages/Testhomepage';
+import ContactUs from './pages/ContactUs';
+import FAQ from './pages/FAQ';
 function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<Register />} />
+        <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/home" element={<Home />} />
+        <Route path="/home" element={<Testhomepage/>} />
         <Route  path='/admin' element={<AdminDashboard/>} />
+         <Route path="/contact" element={<ContactUs />} />
+        <Route path="/faq" element={<FAQ />} />
+
       </Routes>
     </Router>
   );
