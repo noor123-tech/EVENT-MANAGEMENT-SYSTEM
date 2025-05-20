@@ -56,6 +56,7 @@ const Navbar = () => {
     { href: "/home", label: "Home" },
     { href: "/contact", label: "Contact Us" },
     { href: "/faq", label: "FAQ" },
+    { href: "/upcoming-events", label: "Upcoming Events" },
   ]
   if (role === "admin") navLinks.push({ href: "/admin", label: "Admin Dashboard" })
 

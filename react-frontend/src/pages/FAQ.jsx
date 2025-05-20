@@ -1,14 +1,14 @@
 import React, { useState } from "react";
 import { ChevronDown, ChevronUp } from "lucide-react";
-import { Link } from "react-router-dom"; // if you're using react-router, otherwise use <a> tag
+import { Link } from "react-router-dom";
 import Navbar from "../components/Navbar";
-// Simple Button component
+
 function Button({ children, onClick, className }) {
   return (
     <button
       onClick={onClick}
       className={
-        "bg-primary text-white px-4 py-2 rounded hover:bg-primary-dark transition " +
+        "bg-white text-black px-5 py-2 rounded-full font-medium shadow hover:shadow-lg transition duration-300 " +
         (className || "")
       }
     >
@@ -17,7 +17,6 @@ function Button({ children, onClick, className }) {
   );
 }
 
-// Simple FaqAccordion component with dummy questions
 function FaqAccordion() {
   const [activeIndex, setActiveIndex] = useState(null);
 
@@ -44,49 +43,70 @@ function FaqAccordion() {
   };
 
   return (
-    <div className="max-w-4xl mx-auto space-y-4">
-      {faqs.map((faq, index) => (
-        <div
-          key={index}
-          className="border rounded-lg p-4 cursor-pointer bg-muted/50"
-          onClick={() => toggle(index)}
-        >
-          <div className="flex justify-between items-center">
-            <h3 className="text-lg font-medium">{faq.question}</h3>
-            {activeIndex === index ? (
-              <ChevronUp className="w-5 h-5" />
-            ) : (
-              <ChevronDown className="w-5 h-5" />
-            )}
+    <div className="space-y-6">
+      {faqs.map((faq, index) => {
+        const isOpen = activeIndex === index;
+        return (
+          <div
+            key={index}
+            className={`border rounded-xl p-5 bg-neutral-900 text-white shadow-md transition-all duration-300 cursor-pointer ${
+              isOpen ? "ring-1 ring-white" : ""
+            }`}
+            onClick={() => toggle(index)}
+          >
+            <div className="flex justify-between items-center">
+              <h3 className="text-lg font-semibold">{faq.question}</h3>
+              <div
+                className={`transition-transform duration-300 ${
+                  isOpen ? "rotate-180" : "rotate-0"
+                }`}
+              >
+                {isOpen ? (
+                  <ChevronUp className="w-5 h-5 text-gray-300" />
+                ) : (
+                  <ChevronDown className="w-5 h-5 text-gray-300" />
+                )}
+              </div>
+            </div>
+            <div
+              className={`overflow-hidden transition-all duration-300 ease-in-out ${
+                isOpen ? "max-h-40 mt-3 opacity-100" : "max-h-0 opacity-0"
+              }`}
+            >
+              <p className="text-gray-400 text-sm">{faq.answer}</p>
+            </div>
           </div>
-          {activeIndex === index && (
-            <p className="mt-2 text-muted-foreground">{faq.answer}</p>
-          )}
-        </div>
-      ))}
+        );
+      })}
     </div>
   );
 }
 
 export default function FAQ() {
   return (
-    <div className="pt-24 pb-16 px-4">
-        <Navbar/>
-      <div className="container mx-auto max-w-4xl">
-        <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold mb-4">Frequently Asked Questions</h1>
-          <p className="text-xl text-muted-foreground">
-            Find answers to common questions about EventHub.
-          </p>
-        </div>
+    <div className="bg-black text-white min-h-screen">
+      <Navbar />
+      <div className="pt-28 pb-16 px-6">
+        <div className="container mx-auto max-w-3xl">
+          <div className="text-center mb-14">
+            <h1 className="text-4xl font-extrabold mb-3 tracking-tight">
+              Frequently Asked Questions
+            </h1>
+            <p className="text-gray-400 text-lg">
+              Find answers to common questions about EventHub.
+            </p>
+          </div>
 
-        <FaqAccordion />
+          <FaqAccordion />
 
-        <div className="mt-12 text-center">
-          <p className="text-muted-foreground mb-4">Still have questions? We're here to help.</p>
-          <Link to="/contact">
-            <Button>Contact Support</Button>
-          </Link>
+          <div className="mt-14 text-center">
+            <p className="text-gray-400 mb-4 text-sm">
+              Still have questions? We're here to help.
+            </p>
+            <Link to="/contact">
+              <Button>Contact Support</Button>
+            </Link>
+          </div>
         </div>
       </div>
     </div>
