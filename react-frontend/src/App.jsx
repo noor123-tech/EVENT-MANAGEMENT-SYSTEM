@@ -7,6 +7,8 @@ import AdminDashboard from './pages/AdminDashboard';
 import Testhomepage from './pages/Testhomepage';
 import ContactUs from './pages/ContactUs';
 import FAQ from './pages/FAQ';
+import UpcomingEvents from './pages/UpcomingEvents';
+
 function App() {
   return (
     <Router>
@@ -14,6 +16,7 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
         <Route path="/home" element={<Testhomepage/>} />
+        <Route path="/upcoming-events" element={<UpcomingEvents/>} />
         <Route  path='/admin' element={<AdminDashboard/>} />
          <Route path="/contact" element={<ContactUs />} />
         <Route path="/faq" element={<FAQ />} />
